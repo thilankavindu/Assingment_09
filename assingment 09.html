@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>assignment-09</title>
+
+    <style>
+        section{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        // height: 100vh;
+            margin-top: 300px;
+        }
+        section>div{
+            width: 100px;
+            height: 50px;
+            border: 2px solid black;
+            border-radius: 10px;
+            margin: 10px;
+        }
+        section>button{
+            margin-top: -500px;
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+<section id="kiit">
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+
+</section>
+<section>
+    <button id="start">Start</button>
+    <button id="stop">stop</button>
+</section>
+<script src="../asset/pdf/jquery-3.7.1.min.js"></script>
+<script>
+
+    const light_count = 6;
+    let current_light = -1;
+    let direction = "Right";  //right or left
+    let intervalId = null;
+
+    updateLight =() =>{
+        if (direction === "Right"){
+            current_light++
+            $(".light").css("background","white");
+            $(".light").eq(current_light).css("background","red");
+            $(".light").eq(current_light-1).css("background","blue");
+
+            if(current_light==light_count-1){
+                direction ="LEFT"
+            }
+        } else {
+            current_light--
+            $(".light").css("background","white");
+            $(".light").eq(current_light).css("background","red");
+            $(".light").eq(current_light+1).css("background","blue");
+
+
+            if (current_light==0){
+                direction = "Right"
+            }
+        }
+    }
+
+
+    $('#start').on('click', function (){
+        intervalId = setInterval(updateLight,100);
+    });
+
+    $('#stop').on('click', function (){
+        clearInterval(intervalId);
+    });
+</script>
+</body>
+</html>
